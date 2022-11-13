@@ -3,7 +3,7 @@ import React from "react";
 
 const App = (props) => {
   const [count, setCount] = React.useState(0);
-  const [result, setResult] = React.useState(0);
+  const [result, setResult] = React.useState(props.result);
 
   const handleMathClick = (type, number = 1) => {
     if (type === "subtraction") {
@@ -18,16 +18,16 @@ const App = (props) => {
     }
   };
 
-  <>
-    <MathButton name="-10" number="10" type="subtraction" click={handleMathClick} />
-    <MathButton name="-1" number="1" type="subtraction" click={handleMathClick} />
-    <MathButton name="Reset" type="reset" click={handleMathClick} />
-    <MathButton name="1" number="10" type="addition" click={handleMathClick} />
-    <MathButton name="10" number="10" type="addition" click={handleMathClick} />
-    <ResultPanel count={count} result={result} />
-  </>;
-
-  return <></>;
+  return (
+    <>
+      <MathButton name="-10" number="10" type="subtraction" click={handleMathClick} />
+      <MathButton name="-1" number="1" type="subtraction" click={handleMathClick} />
+      <MathButton name="Reset" type="reset" click={handleMathClick} />
+      <MathButton name="1" number="1" type="addition" click={handleMathClick} />
+      <MathButton name="10" number="10" type="addition" click={handleMathClick} />
+      <ResultPanel count={count} result={result} />
+    </>
+  );
 };
 
 const MathButton = (props) => {
