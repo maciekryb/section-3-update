@@ -1,27 +1,17 @@
-import './App.css';
-import React from 'react';
+import "./App.css";
+import React from "react";
 
-class Addsign extends React.Component {
-  state = {
-    text: 'a',
-  };
+const Addsign = () => {
+  const [text, setText] = React.useState("");
 
-  handleAdd = () => {
-    const letter = 'a';
-    this.setState({
-      text: this.state.text + letter,
-    });
-  };
+  const handleOnClick = () => setText(`${text}a`);
 
-  render() {
-    return (
-      <>
-        <button onClick={this.handleAdd}>Dodaj a</button>
-        <br />
-        {this.state.text}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <button onClick={handleOnClick}>Dodaj "A"</button>
+      <h1>{text}</h1>
+    </>
+  );
+};
 
 export default Addsign;
