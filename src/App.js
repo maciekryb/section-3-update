@@ -1,21 +1,52 @@
 import "./App.css";
 import React from "react";
 
-const App = () => {
-  const [value, setValue] = React.useState("");
+const App = (props) => {
+  const [count, setCount] = React.useState(0);
+  const [result, setResult] = React.useState(0);
 
-  const handleOnChange = (event) => setValue(event.target.value);
-  const handleClick = () => setValue("");
+  const handleMathClick = (type, number = 1) => {
+    if (type === "subtraction") {
+      setCount(count + 1);
+      setResult(result - number);
+    } else if (type === "reset") {
+      setCount(count + 1);
+      setResult(0);
+    } else {
+      setCount(count + 1);
+      setResult(result + number);
+    }
+  };
+
+  <>
+    <MathButton name="-10" number="10" type="subtraction" click={handleMathClick} />
+    <MathButton name="-1" number="1" type="subtraction" click={handleMathClick} />
+    <MathButton name="Reset" type="reset" click={handleMathClick} />
+    <MathButton name="1" number="10" type="addition" click={handleMathClick} />
+    <MathButton name="10" number="10" type="addition" click={handleMathClick} />
+    <ResultPanel count={count} result={result} />
+  </>;
+
+  return <></>;
+};
+
+const MathButton = (props) => {
+  const number = parseInt(props.number);
   return (
     <>
-      <input
-        value={value}
-        placeholder="wpisz tekst..."
-        onChange={handleOnChange}
-        type="text"
-      />
-      <button onClick={handleClick}>Reset</button>
-      <h1 className="title">{value.toUpperCase()}</h1>
+      <button onClick={() => props.click(props.type, number)}>{props.name}</button>
+    </>
+  );
+};
+
+const ResultPanel = (props) => {
+  return (
+    <>
+      <h1>
+        Liczba klknięć: {props.count}
+        {props.count > 10 ? <span>Przeciązenie procesora</span> : null}
+      </h1>
+      <h1>Wynik: {props.result}</h1>
     </>
   );
 };
