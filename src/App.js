@@ -1,16 +1,39 @@
-import React, { useState } from "react";
+import { render } from "@testing-library/react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const App = (props) => {
+const App = () => {
   const [counter, setCounter] = useState(0);
+  const [isActive, setIsActive] = useState(true);
 
-  const handler = () => setCounter(counter + 1);
+  const handler = () => setCounter((prevValue) => prevValue + 1);
+  const toggleVisibilityCounter = () => setIsActive((prevValue) => !prevValue);
+
+  // useEffect(() => {
+  //   alert("Hello");
+  // }, []);
 
   return (
-    <div onClick={handler}>
-      <h1>{counter}</h1>
-      <h2>Licznik</h2>
-      <p>Lorem ipsum</p>
+    <div>
+      <button onClick={toggleVisibilityCounter}>Pokaz/ukryj komponent</button>
+      {isActive && <Counter />}
+    </div>
+  );
+};
+
+const Counter = () => {
+  const [counter, setCounter] = useState(0);
+
+  const handleMouseMove = (event) => setCounter(event.clientX);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  return (
+    <div>
+      <p>{counter}</p>
+      {/* <p>{rerenderCounter}</p> */}
     </div>
   );
 };
